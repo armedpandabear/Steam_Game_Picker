@@ -3,20 +3,18 @@ package com.example.steamgamepicker
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.game_layout.view.*
-
-
 
 
 class CustomAdapter(
     private val gamesList: MutableList<Game>
     ) : RecyclerView.Adapter<CustomAdapter.GameViewHolder>() {
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder(
@@ -30,8 +28,13 @@ class CustomAdapter(
         holder.itemView.apply {
             txGameTitle.text = curGame.gameName
             cbGame.isChecked = curGame.isChecked
+            val deleteButton = buttonDeleteGame
+            if(deleteButton == null) {
+                Toast.makeText(this.context, "ButtonDeleteGae returned null",Toast.LENGTH_SHORT)
+                    .show()
+            }
             cbGame.setOnCheckedChangeListener { _, isChecked ->
-                
+
             }
         }
     }
@@ -60,3 +63,6 @@ class CustomAdapter(
     }
 
 }
+
+
+
